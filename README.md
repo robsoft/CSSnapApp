@@ -9,6 +9,8 @@ end the POS software sees the incoming file for that till instance and pounces o
 Android is the primary platform due to us having an abundance of spare Android devices kicking around. iOS will be
 picked up as we go under a best-endeavours approach, hoping they don't get too seperated.
 
+(uses Xamarin.Forms & James Montemagno's settings plugin)
+
 ##Current status;##
 
 * **basic framework:** android done, iOS done
