@@ -1,0 +1,183 @@
+﻿using System;
+
+using Xamarin.Forms;
+using System.IO;
+
+//using Android.Widget;
+using System.Net;
+
+namespace XamCamKick
+{
+	public class App : Application
+	{
+
+		public static App Instance;
+
+		readonly Image image = new Image();
+		public bool haveShot = false;
+
+		public App()
+		{
+			Instance = this;
+
+			image.Source = ImageSource.FromResource("XamCamKick.cashshopsmaller.jpeg");
+			//image.VerticalOptions.Alignment = LayoutOptions.CenterAndExpand;
+
+			MainPage = new ContentPage {
+				Content = new StackLayout {
+					VerticalOptions = LayoutOptions.FillAndExpand,
+					Children = {
+						new StackLayout {
+							VerticalOptions = LayoutOptions.StartAndExpand,
+							Children = {
+								new Button {
+									Text = "Snap Jewellery!",
+									Command = new Command(o => ShouldTakePicture()),
+								},
+								image,
+								new Button {
+									Text = "Send Snap [email]",
+									Command = new Command(o => DoSendEmailPicture()),
+								},
+								new Button {
+									Text = "Send Snap [FTP/Till]",
+									Command = new Command(o => DoSendNetworkPicture()),
+								},
+								new Button {
+									Text = "Read Some Small Print",
+									Command = new Command(o => DoReadSmallPrint()),
+								},
+								new Button {
+									Text = "Spoofed Browser",
+									Command = new Command(o => DoSpoofedBrowser()),
+								},
+							},
+						},
+						new StackLayout {
+							Orientation = StackOrientation.Horizontal,
+							HorizontalOptions = LayoutOptions.Fill,
+							Children = {
+								new Button {
+									Text = "Settings!",
+									HorizontalOptions = LayoutOptions.FillAndExpand,
+									Command = new Command(o => DoShowSettings()),
+								},
+
+								new Button {
+									Text = "Till 1",
+									HorizontalOptions = LayoutOptions.FillAndExpand,
+									Command = new Command(o => DoTillSettings()),
+								},
+
+								new Button {
+									Text = "Info",
+									HorizontalOptions = LayoutOptions.FillAndExpand,
+									Command = new Command(o => DoInfo()),
+								},
+							},
+						},
+					},
+				},
+			};
+		}
+
+		public void DropPicture()
+		{
+			image.Source = ImageSource.FromResource("XamCamKick.cashshopsmaller.jpeg");
+		}
+
+		public event Action ShouldTakePicture = () => {};
+
+		public event Action DoSendNetworkPicture = () => {};
+		public event Action DoSendEmailPicture = () => {};
+		public event Action DoShowSettings = () => {};
+		public event Action DoReadSmallPrint = () => {};
+		public event Action DoSpoofedBrowser = () => {};
+		public event Action DoTillSettings = () => {};
+		public event Action DoInfo = () => {};
+
+		public void ShowSettings()
+		{
+			this.MainPage.DisplayAlert("Settings", "Network, security and file storage settings.", "Ok");
+		}
+
+		public void Info()
+		{
+			this.MainPage.DisplayAlert("Info", "Debug and troubleshooting info.", "Ok");
+		}
+
+		public void TillSettings()
+		{
+			this.MainPage.DisplayAlert("Link To Till", "Choose a Symphony Till from the logged-in users in this store.", "Ok");
+		}
+
+		public void ShowSmallPrint()
+		{
+			this.MainPage.DisplayAlert("Show Small Print", "Check out some sample small print on the device.", "Ok");
+		}
+
+		public void SpoofBrowser()
+		{
+			this.MainPage.DisplayAlert("Spoof Browser", "Pretend to be Internet Explorer 10 and visit a website.", "Ok");
+		}
+
+
+		public bool CheckShot()
+		{
+			if (!App.Instance.haveShot) {
+				this.MainPage.DisplayAlert("Jewellery Picture", "You need to take a picture before you can send it.", "Ok");
+			}
+			return App.Instance.haveShot;
+		}
+
+		public void NetworkPicture(string filepath)
+		{	
+
+			string ftpUser = "administrator";
+			string ftpPass = "b00qw2j";
+			string ftpfullpath = "ftp://192.168.51.12/test.jpg";
+
+			FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create(ftpfullpath);
+			ftp.Credentials = new NetworkCredential(ftpUser, ftpPass);
+			ftp.KeepAlive = true;
+			ftp.UseBinary = true;
+			ftp.Method = WebRequestMethods.Ftp.UploadFile;
+			FileStream fs = //System.IO.File.OpenRead(tmpfile.Path);
+				new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.Read);
+			byte[] buffer = new byte[fs.Length];
+			fs.Read(buffer, 0, buffer.Length);
+			fs.Close();
+
+			System.IO.Stream ftpstream = ftp.GetRequestStream();
+			ftpstream.Write(buffer, 0, buffer.Length);
+			ftpstream.Close();
+			ftpstream.Flush();
+
+			MainPage.DisplayAlert("Network Upload", "File saved to network", "ok");
+
+		}
+
+		public void ShowImage(string filepath)
+		{
+			image.Source = ImageSource.FromFile(filepath);
+			haveShot = true;
+		}
+
+		protected override void OnStart()
+		{
+			// Handle when your app starts
+		}
+
+		protected override void OnSleep()
+		{
+			// Handle when your app sleeps
+		}
+
+		protected override void OnResume()
+		{
+			// Handle when your app resumes
+		}
+	}
+}
+
+

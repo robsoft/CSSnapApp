@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{B1E96D3C-E1D2-4196-A207-90115DFD91D7}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CSApp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CSApp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NetworkHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TillPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)DocsEtc\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SharedResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)DocsEtc\Old-Droid-Code.txt" />
+    <None Include="$(MSBuildThisFileDirectory)DocsEtc\Old-App-Main.txt" />
+    <None Include="$(MSBuildThisFileDirectory)DocsEtc\_read_me.txt" />
+    <None Include="$(MSBuildThisFileDirectory)SharedResources\ic_drawer1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)SharedResources\cashshopsmaller.jpeg">
+      <LogicalName>CSApp.SharedResources.cashshopsmaller.jpeg</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

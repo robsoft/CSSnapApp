@@ -1,0 +1,151 @@
+﻿
+using System;
+
+using Android.App;
+using Android.Content;
+using Android.Content.PM;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using Xamarin.Forms;
+using Java.IO;
+
+using System.IO;
+using Android.Provider;
+using Android.Media;
+using System.Net;
+using Android.Net;
+using Android.OS.Storage;
+using Android.Graphics;
+using System.Runtime.InteropServices;
+using Java.Security;
+
+
+namespace XamCamKick.Droid
+{
+
+	[Activity(Label = "XamCamKick.Droid", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+	{
+
+		public static readonly Java.IO.File tmpfile = 
+			new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+				"_tmp_xamcam.jpg");
+
+		protected override void OnCreate(Bundle bundle)
+		{
+			base.OnCreate(bundle);
+
+
+			global::Xamarin.Forms.Forms.Init(this, bundle);
+
+			LoadApplication(new App());
+
+			App.Instance.ShouldTakePicture += () => {
+				var intent = new Intent(MediaStore.ActionImageCapture);
+				intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(tmpfile));
+				StartActivityForResult(intent, 0);
+			};
+
+			App.Instance.DoSendEmailPicture += () => {
+				if (!App.Instance.CheckShot())
+					return;
+
+				var uri = Android.Net.Uri.FromFile(tmpfile);
+				tmpfile.SetReadable(true, true);
+
+				var email = new Intent(Android.Content.Intent.ActionSend);
+				email.PutExtra(Android.Content.Intent.ExtraEmail, new string[]{ "rob@robsoft.net" });
+				email.PutExtra(Intent.ExtraStream, uri);
+				email.SetType("message/rfc822");
+				email.PutExtra(Android.Content.Intent.ExtraSubject, "Stuff from CSLApp");
+				email.PutExtra(Android.Content.Intent.ExtraText, "Here's the snap");
+				StartActivity(email);
+			};
+
+
+			App.Instance.DoSendNetworkPicture += () => {
+				if (!App.Instance.CheckShot())
+					return;
+				App.Instance.NetworkPicture(tmpfile.Path);
+			};
+
+			App.Instance.DoShowSettings += () => {
+				App.Instance.ShowSettings();
+			};
+			
+			App.Instance.DoTillSettings += () => {
+				App.Instance.TillSettings();
+			};
+
+			App.Instance.DoReadSmallPrint += () => {
+				App.Instance.ShowSmallPrint();
+			};
+			App.Instance.DoSpoofedBrowser += () => {
+				App.Instance.SpoofBrowser();
+			};
+			App.Instance.DoInfo += () => {
+				App.Instance.Info();
+			};
+		}
+
+
+		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			base.OnActivityResult(requestCode, resultCode, data);
+
+			var mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
+			mediaScanIntent.SetData(Android.Net.Uri.FromFile(tmpfile));
+			SendBroadcast(mediaScanIntent);
+
+			// convert to bitmap
+			Bitmap originalImage = BitmapFactory.DecodeFile(tmpfile.Path);
+
+			// resize stuff biggest dimension to be 2048;
+			float maxWidth = 2048f;
+			float maxHeight = 2048f;
+			float oldWidth = (float)originalImage.Width;
+			float oldHeight = (float)originalImage.Height;
+			float scaleFactor = 1f;
+			float newWidth = oldWidth;
+			float newHeight = oldHeight;
+
+			if ((oldWidth > maxWidth) || (oldHeight > maxHeight)) {
+				// figure out best scalefactor given our constraints
+				if (oldWidth > oldHeight) {
+					scaleFactor = maxWidth / oldWidth;
+				} else {
+					scaleFactor = maxHeight / oldHeight;
+				}
+				newHeight = oldHeight * scaleFactor;
+				newWidth = oldWidth * scaleFactor;
+			
+				System.Console.WriteLine("sf " + scaleFactor.ToString() + ", old " + oldWidth.ToString() + "," + oldHeight.ToString() + " new " +
+				newWidth.ToString() + "," + newHeight.ToString());
+
+				Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int)newWidth, (int)newHeight, false);
+				originalImage.Recycle();
+
+				// get rid of the previous file - if we don't do this, create or createnew has a problem
+				// with the file being in use (?)
+				tmpfile.Delete();
+				var os = new FileStream(tmpfile.Path, FileMode.Create);
+				resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, os);
+				os.Flush();
+				os.Close();
+
+				// ensure we're not holding onto these bitmap resources
+				resizedImage.Recycle();
+			} else {
+				originalImage.Recycle();
+			}
+			// and now get the showimage method to show the altered file
+			App.Instance.ShowImage(tmpfile.Path);
+
+		}
+
+
+	}
+}
+
