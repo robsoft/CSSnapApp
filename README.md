@@ -23,7 +23,5 @@ picked up as we go under a best-endeavours approach, hoping they don't get too s
 * **till selection:** android *not* done, iOS *not* done
 * **error trapping and 'no network' handling:** android *not* done, iOS *not* done
 
-![](https://github.com/robsoft/CSSnapApp/blob/master/CSApp/DocsEtc/Screenshot_2015-03-08-16-43-20.png)
-![](https://github.com/robsoft/CSSnapApp/blob/master/CSApp/DocsEtc/Screenshot_2015-03-08-16-43-35.png)
 ![](https://github.com/robsoft/CSSnapApp/blob/master/CSApp/DocsEtc/Screenshot_2015-03-08-16-44-01.png)
 
