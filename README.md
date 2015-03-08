@@ -11,6 +11,8 @@ picked up as we go under a best-endeavours approach, hoping they don't get too s
 
 (uses Xamarin.Forms & James Montemagno's settings plugin)
 
+[More details here](docs/CSApp/DocsEtc/_read_me.txt)
+
 ##Current status;##
 
 * **basic framework:** android done, iOS done
@@ -20,4 +22,8 @@ picked up as we go under a best-endeavours approach, hoping they don't get too s
 * **email sending:** android done, iOS *not* done
 * **till selection:** android *not* done, iOS *not* done
 * **error trapping and 'no network' handling:** android *not* done, iOS *not* done
+
+![alt tag](https://github.com/robsoft/CSSnapApp/CSApp/DocsEtc/Screenshot_2015-03-08-16-43-20.png)
+![alt tag](https://github.com/robsoft/CSSnapApp/CSApp/DocsEtc/Screenshot_2015-03-08-16-43-45.png)
+![alt tag](https://github.com/robsoft/CSSnapApp/CSApp/DocsEtc/Screenshot_2015-03-08-16-44-01.png)
 
