@@ -5,6 +5,7 @@ using CSApp.Helpers;
 
 //using Java.Security;
 //using FFImageLoading.Cache;
+using Android.OS;
 
 namespace CSApp
 {
@@ -18,10 +19,47 @@ namespace CSApp
 		private bool haveShot = false;
 		//public string tmpfile = "";
 
+		private Button settingsButton;
+		private Button tillButton;
+		private Button emailButton;
+
 		public MenuPage()
 		{
 			Title = "Cash Shop 'Snap'";
 			image.Source = ImageSource.FromResource("CSApp.SharedResources.cashshopsmaller.jpeg");
+
+			settingsButton = new Button {
+				BackgroundColor = Color.White,
+				Image = "gear.png",
+				WidthRequest = 60,
+				HeightRequest = 60,
+				HorizontalOptions = LayoutOptions.Start,
+				Command = new Command(() => {
+					DoSettings();
+				}),
+			};
+			emailButton = new Button {
+				BackgroundColor = Color.White,
+				Image = "envelope.png",
+				WidthRequest = 84,
+				HeightRequest = 60,
+				HorizontalOptions = LayoutOptions.Start,
+				Command = new Command(() => {
+					DoEmail();
+				}),
+			};
+			tillButton = new Button {
+				BackgroundColor = Color.White,
+				Text = "Till 1",
+				TextColor = Color.Black,
+				HeightRequest = 60,
+				HorizontalOptions = LayoutOptions.FillAndExpand,
+				Command = new Command(() => { 
+					DoTill(); 
+				}),
+
+			};
+		
 
 			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.FillAndExpand,
@@ -50,8 +88,7 @@ namespace CSApp
 								Text = "Send to my Till",
 								Image = "imac.png",
 								Command = new Command(() => {
-									if (CheckShot())
-										DoSendNetworkPicture();
+									if (CheckShot()) DoSendNetworkPicture();
 								}),
 							},
 						},
@@ -61,38 +98,9 @@ namespace CSApp
 						HorizontalOptions = LayoutOptions.Fill,
 						//Padding = new Thickness(5, 0, 5, 0),
 						Children = {
-							new Button {
-								BackgroundColor = Color.White,
-								Image = "gear.png",
-								WidthRequest = 60,
-								HeightRequest = 60,
-								HorizontalOptions = LayoutOptions.Start,
-								Command = new Command(() => {
-									Navigation.PushAsync(new SettingsPage());
-								}),
-							},
-							new Button {
-								BackgroundColor = Color.White,
-								Image = "envelope.png",
-								WidthRequest = 84,
-								HeightRequest = 60,
-								HorizontalOptions = LayoutOptions.Start,
-								Command = new Command(() => {
-									if (CheckShot())
-										DoSendEmailPicture();
-								}),
-							},
-
-							new Button {
-								BackgroundColor = Color.White,
-								Text = "Till 1",
-								TextColor = Color.Black,
-								HeightRequest = 60,
-								HorizontalOptions = LayoutOptions.FillAndExpand,
-								Command = new Command(() => {
-									Navigation.PushAsync(new TillPage());
-								}),
-							},
+							settingsButton, 
+							emailButton,
+							tillButton,
 
 						},
 					},
@@ -111,6 +119,27 @@ namespace CSApp
 		public event Action DoSendEmailPicture = () => {};
 		public event Action DoSendNetworkPicture = () => {};
 
+		async private void DoSettings()
+		{
+			settingsButton.IsEnabled = false;
+			await Navigation.PushAsync(new SettingsPage());
+			settingsButton.IsEnabled = true;
+		}
+
+
+		async private void DoTill()
+		{
+			tillButton.IsEnabled = false;
+			await Navigation.PushAsync(new TillPage());
+			tillButton.IsEnabled = true;
+		}
+
+		private void DoEmail()
+		{
+			emailButton.IsEnabled = false;
+			if (CheckShot()) DoSendEmailPicture();
+			emailButton.IsEnabled = true;
+		}
 
 		public void ShowImage(string tmpfile)
 		{
