@@ -26,6 +26,8 @@ namespace CSApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::CSApp.Droid.Resource.String.ApplicationName;
+			global::Xamarin.Forms.Platform.Resource.String.Hello = global::CSApp.Droid.Resource.String.Hello;
 			global::ModernHttpClient.Resource.String.library_name = global::CSApp.Droid.Resource.String.library_name;
 		}
 		
@@ -63,9 +65,6 @@ namespace CSApp.Droid
 			// aapt resource value: 0x7f020005
 			public const int imac = 2130837509;
 			
-			// aapt resource value: 0x7f020006
-			public const int monoandroidsplash = 2130837510;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -79,6 +78,12 @@ namespace CSApp.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f030002
+			public const int ApplicationName = 2130903042;
+			
+			// aapt resource value: 0x7f030001
+			public const int Hello = 2130903041;
+			
 			// aapt resource value: 0x7f030000
 			public const int library_name = 2130903040;
 			
@@ -88,22 +93,6 @@ namespace CSApp.Droid
 			}
 			
 			private String()
-			{
-			}
-		}
-		
-		public partial class Style
-		{
-			
-			// aapt resource value: 0x7f040000
-			public const int Mono_Android_Theme_Splash = 2130968576;
-			
-			static Style()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Style()
 			{
 			}
 		}

@@ -3,9 +3,7 @@
 using Xamarin.Forms;
 using CSApp.Helpers;
 
-//using Java.Security;
-//using FFImageLoading.Cache;
-using Android.OS;
+//using Android.OS;
 
 namespace CSApp
 {
