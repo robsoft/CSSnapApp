@@ -13,7 +13,7 @@ picked up as we go under a best-endeavours approach, hoping they don't get too s
 
 [More details here](docs/CSApp/DocsEtc/_read_me.txt)
 
-##Current status;##
+## Current status;
 
 * **basic framework:** android done, iOS done
 * **save/oad settings:** android done, iOS done
