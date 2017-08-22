@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string>com.your-company.CSApp.iOS</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -59,5 +57,11 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleDisplayName</key>
 	<string>CS Snap</string>
+	<key>CFBundleName</key>
+	<string>CS Snap</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.robsoftdev.cssnap</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The app needs acces to your camera.</string>
 </dict>
 </plist>

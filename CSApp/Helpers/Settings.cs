@@ -1,5 +1,6 @@
-﻿using Refractored.Xam.Settings;
-using Refractored.Xam.Settings.Abstractions;
+﻿using Plugin.Settings;
+using Plugin.Settings.Abstractions;
+
 using System;
 
 //using Java.Sql;
@@ -38,44 +39,44 @@ namespace CSApp.Helpers
 		private static readonly string HandsetNameDefault = string.Empty;
 
 		private const string LastLaunchedKey = "last_launched_key";
-		private static readonly string LastLaunchedDefault = DateTime.Now.ToString();
+		private static readonly string LastLaunchedDefault = DateTime.Now.ToString ();
 
 		#endregion
 
 
 		public static string FTPUser {
-			get { return AppSettings.GetValueOrDefault(FTPUserKey, FTPUserDefault); }
-			set { AppSettings.AddOrUpdateValue(FTPUserKey, value); }
+			get { return AppSettings.GetValueOrDefault (FTPUserKey, FTPUserDefault); }
+			set { AppSettings.AddOrUpdateValue (FTPUserKey, value); }
 		}
 
 		public static string FTPPass {
-			get { return AppSettings.GetValueOrDefault(FTPPassKey, FTPPassDefault); }
-			set { AppSettings.AddOrUpdateValue(FTPPassKey, value); }
+			get { return AppSettings.GetValueOrDefault (FTPPassKey, FTPPassDefault); }
+			set { AppSettings.AddOrUpdateValue (FTPPassKey, value); }
 		}
 
 		public static string FTPServer {
-			get { return AppSettings.GetValueOrDefault(FTPServerKey, FTPServerDefault); }
-			set { AppSettings.AddOrUpdateValue(FTPServerKey, value); }
+			get { return AppSettings.GetValueOrDefault (FTPServerKey, FTPServerDefault); }
+			set { AppSettings.AddOrUpdateValue (FTPServerKey, value); }
 		}
 
 		public static string TillDisplayName {
-			get { return AppSettings.GetValueOrDefault(TillDisplayNameKey, TillDisplayNameDefault); }
-			set { AppSettings.AddOrUpdateValue(TillDisplayNameKey, value); }
+			get { return AppSettings.GetValueOrDefault (TillDisplayNameKey, TillDisplayNameDefault); }
+			set { AppSettings.AddOrUpdateValue (TillDisplayNameKey, value); }
 		}
 
 		public static int TillUserID {
-			get { return AppSettings.GetValueOrDefault(TillUserIDKey, TillUserIDDefault); }
-			set { AppSettings.AddOrUpdateValue(TillUserIDKey, value); }
+			get { return AppSettings.GetValueOrDefault (TillUserIDKey, TillUserIDDefault); }
+			set { AppSettings.AddOrUpdateValue (TillUserIDKey, value); }
 		}
 
 		public static string HandsetName {
-			get { return AppSettings.GetValueOrDefault(HandsetNameKey, HandsetNameDefault); }
-			set { AppSettings.AddOrUpdateValue(HandsetNameKey, value); }
+			get { return AppSettings.GetValueOrDefault (HandsetNameKey, HandsetNameDefault); }
+			set { AppSettings.AddOrUpdateValue (HandsetNameKey, value); }
 		}
 
 		public static string LastLaunched {
-			get { return AppSettings.GetValueOrDefault(LastLaunchedKey, LastLaunchedDefault); }
-			set { AppSettings.AddOrUpdateValue(LastLaunchedKey, value); }
+			get { return AppSettings.GetValueOrDefault (LastLaunchedKey, LastLaunchedDefault); }
+			set { AppSettings.AddOrUpdateValue (LastLaunchedKey, value); }
 		}
 	}
 }

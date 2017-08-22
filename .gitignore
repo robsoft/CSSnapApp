@@ -1,8 +1,6 @@
-/Droid/bin/debug/*
-/Droid/obj/debug/*
-/iOS/bin/iPhoneSimulator/*
-/iOS/obj/iPhoneSimulator/*
-/iOS/bin/debug/*
-/iOS/obj/debug/*
+/Droid/bin/*
+/Droid/obj/*
+/iOS/bin/*
+/iOS/obj/*
 /packages/*
 !/packages/repositories.config

@@ -1,18 +1,34 @@
-﻿<Properties StartupItem="Droid/CSApp.Droid.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/AppDelegate.cs">
+﻿<Properties StartupConfiguration="{414D1F74-3746-4566-87E5-2FE228AFE1FA}|Default">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="CSApp/CSApp.cs" Line="1" Column="1" />
       <File FileName="CSApp/MenuPage.cs" Line="113" Column="1" />
       <File FileName="Droid/MainActivity.cs" Line="39" Column="4" />
       <File FileName="iOS/AppDelegate.cs" Line="57" Column="25" />
       <File FileName="iOS/Main.cs" Line="28" Column="4" />
+      <File FileName="packages/Xam.Plugins.Settings.3.0.1/readme.txt" Line="1" Column="1" />
+      <File FileName="CSApp/Helpers/Settings.cs" Line="3" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CSApp" expanded="True">
+            <Node name="CSApp" expanded="True">
+              <Node name="Helpers" expanded="True" />
+            </Node>
+            <Node name="CSApp.Droid" expanded="True" />
+            <Node name="CSApp.iOS" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.CSApp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.157460dea6fc2b7c262a48c61a36f9bc5ebc4ef7" />
+  <MonoDevelop.Ide.ItemProperties.CSApp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.abeb71f34b7d0e44b9bb0c02a270eef722b87ba2" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.CSApp.Droid PreferredExecutionTarget="Android.HT4B4JT03663" />
 </Properties>
